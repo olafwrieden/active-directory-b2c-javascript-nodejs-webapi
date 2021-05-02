@@ -37,8 +37,23 @@ app.use((req, res, next) => {
     next();
 });
 
+app.get("/", (req, res) => {
+    res.send("Hello World!");
+});
+
 // API endpoint
 app.get('/hello',
+    passport.authenticate('oauth-bearer', {session: false}),
+    (req, res) => {
+        console.log('Validated claims: ', req.authInfo);
+        
+        // Service relies on the name claim.  
+        res.status(200).json({'name': req.authInfo['name']});
+    }
+);
+
+// API endpoint
+app.get('/me',
     passport.authenticate('oauth-bearer', {session: false}),
     (req, res) => {
         console.log('Validated claims: ', req.authInfo);
