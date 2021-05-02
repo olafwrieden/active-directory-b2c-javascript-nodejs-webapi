@@ -1,3 +1,5 @@
+<https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-v2-nodejs-console>
+
 ---
 page_type: sample
 languages:
