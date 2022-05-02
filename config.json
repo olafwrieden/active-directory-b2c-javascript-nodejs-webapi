@@ -1,23 +1,23 @@
 {
-    "credentials": {
-        "tenantName": "nemopi",
-        "clientID": "93f423c8-3e7f-4458-87ca-069cb4a62049"
-    },
-    "policies": {
-        "policyName": "B2C_1_susi"
-    },
-    "resource": {
-        "scope": ["demo.read", "demo.read"]
-    },
-    "metadata": {
-        "authority": "login.microsoftonline.com",
-        "discovery": ".well-known/openid-configuration",
-        "version": "v2.0"
-    },
-    "settings": {
-        "isB2C": true,
-        "validateIssuer": false,
-        "passReqToCallback": false,
-        "loggingLevel": "info"
-    }
+  "credentials": {
+    "tenantName": "nemopi",
+    "clientID": "93f423c8-3e7f-4458-87ca-069cb4a62049"
+  },
+  "policies": {
+    "policyName": "B2C_1_susi"
+  },
+  "resource": {
+    "scope": ["demo.read", "demo.read", "tasks.read"]
+  },
+  "metadata": {
+    "authority": "login.microsoftonline.com",
+    "discovery": ".well-known/openid-configuration",
+    "version": "v2.0"
+  },
+  "settings": {
+    "isB2C": true,
+    "validateIssuer": true,
+    "passReqToCallback": false,
+    "loggingLevel": "info"
+  }
 }

@@ -8,8 +8,16 @@ const fetch = require("node-fetch");
 require("dotenv").config();
 const auth = require("./auth");
 
-const BearerStrategy = require("passport-azure-ad").BearerStrategy;
+const todolist = require("./todolist");
+const cors = require("cors");
 
+//<ms_docref_import_azuread_lib>
+const BearerStrategy = require("passport-azure-ad").BearerStrategy;
+//</ms_docref_import_azuread_lib>
+
+global.global_todos = [];
+
+//<ms_docref_azureadb2c_options>
 const options = {
   identityMetadata: `https://${config.credentials.tenantName}.b2clogin.com/${config.credentials.tenantName}.onmicrosoft.com/${config.policies.policyName}/${config.metadata.version}/${config.metadata.discovery}`,
   clientID: config.credentials.clientID,
@@ -26,13 +34,7 @@ const bearerStrategy = new BearerStrategy(options, (token, done) => {
   done(null, {}, token);
 });
 
-const app = express();
-
-app.use(morgan("dev"));
-
-app.use(passport.initialize());
-
-passport.use(bearerStrategy);
+app.use(express.json());
 
 //enable CORS (for testing only -remove in production/deployment)
 app.use((req, res, next) => {
@@ -100,6 +102,9 @@ app.get(
     }
   }
 );
+
+// API anonymous endpoint, returns a date to the caller.
+app.get("/public", (req, res) => res.send({ date: new Date() }));
 
 /**
  * Calls the endpoint with authorization bearer token.
